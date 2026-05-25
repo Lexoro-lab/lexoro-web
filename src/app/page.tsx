@@ -1,12 +1,18 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Products from "@/components/Products";
+import Pricing from "@/components/Pricing";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
       <Hero />
+      <Products />
+      <Pricing />
+      <Footer />
     </main>
   );
 }
