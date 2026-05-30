@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer style={{ borderTop: '1px solid rgba(255,255,255,0.05)', padding: '60px 40px 32px' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}
+        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
           <div>
             <Logo />
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', lineHeight: 1.7, marginTop: 16, maxWidth: 280 }}>
