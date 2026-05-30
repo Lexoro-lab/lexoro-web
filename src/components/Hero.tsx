@@ -142,15 +142,17 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.65 }}
             className="flex gap-3 justify-center mb-20"
           >
-            <motion.button
+            <motion.a
+              href="https://bizbrain-xi.vercel.app/register"
               whileHover={{ scale: 1.02, boxShadow: '0 20px 40px rgba(0,74,173,0.4)' }}
               whileTap={{ scale: 0.98 }}
               className="px-7 py-3.5 text-white font-semibold text-[15px] rounded-xl flex items-center gap-2"
               style={{ background: '#004aad' }}
             >
-              Start free trial →
-            </motion.button>
-            <motion.button
+              Start free trial <span className="arr">→</span>
+            </motion.a>
+            <motion.a
+              href="#"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="px-7 py-3.5 text-[15px] rounded-xl flex items-center gap-2"
@@ -158,7 +160,7 @@ export default function Hero() {
             >
               <span style={{ width: 20, height: 20, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9 }}>▶</span>
               Watch 2min demo
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           <motion.div

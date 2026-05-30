@@ -97,10 +97,12 @@ export default function Pricing() {
                   {f}
                 </div>
               ))}
-              <motion.button
+              <motion.a
+                href="https://bizbrain-xi.vercel.app/register"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 style={{
+                  display: 'block', textAlign: 'center', textDecoration: 'none',
                   width: '100%', padding: '11px', borderRadius: 9, fontSize: 13, fontWeight: 600, cursor: 'pointer', marginTop: 24, fontFamily: 'inherit', transition: 'all 0.2s',
                   background: plan.popular ? activeTab.color : 'transparent',
                   color: plan.popular ? '#fff' : 'rgba(255,255,255,0.5)',
@@ -108,7 +110,7 @@ export default function Pricing() {
                 }}
               >
                 {plan.popular ? 'Get started →' : 'Get started'}
-              </motion.button>
+              </motion.a>
             </motion.div>
           ))}
         </div>

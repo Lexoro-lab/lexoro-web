@@ -39,16 +39,18 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden md:flex items-center gap-3">
-          <button className="text-sm text-white/50 hover:text-white px-4 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-all duration-200">
+          <a href="https://bizbrain-xi.vercel.app/login"
+          className="text-sm text-white/50 hover:text-white px-4 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-all duration-200">
             Sign in
-          </button>
-          <motion.button
+          </a>
+          <motion.a
+          href="https://bizbrain-xi.vercel.app/register"
             whileHover={{ scale: 1.02, boxShadow: '0 0 24px rgba(0,74,173,0.4)' }}
             whileTap={{ scale: 0.98 }}
             className="text-sm font-semibold text-white px-5 py-2 rounded-lg bg-[#004aad] hover:bg-[#0056cc] transition-colors duration-200"
           >
             Get started →
-          </motion.button>
+          </motion.a>
         </div>
       </div>
     </motion.nav>
