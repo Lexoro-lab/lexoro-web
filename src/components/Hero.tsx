@@ -215,7 +215,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,155px) 1fr', padding: 20, gap: 16, overflowX: 'auto' }}></div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,155px) 1fr', padding: 20, gap: 16, overflowX: 'auto' }}>
                 <div style={{ borderRight: '1px solid rgba(255,255,255,0.04)', paddingRight: 14 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
                     <div style={{ width: 22, height: 22, background: '#004aad', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 800, color: '#fff', ...syneStyle }}>B</div>
