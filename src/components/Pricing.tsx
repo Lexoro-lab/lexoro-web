@@ -66,7 +66,9 @@ export default function Pricing() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+        <div 
+        className="pricing-grid" 
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, maxWidth: 900, margin: '0 auto' }}
           {currentPlans.map((plan, i) => (
             <motion.div
               key={plan.name}

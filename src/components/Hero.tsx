@@ -110,7 +110,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
             style={syneStyle}
-            className="font-extrabold text-[58px] md:text-[72px] leading-[1.03] tracking-[-3.5px] mb-6"
+            className="font-extrabold text-[38px] md:text-[72px] leading-[1.03] tracking-[-2px] md:tracking-[-3.5px] mb-6"
           >
             AI that runs your
             <br />
@@ -140,7 +140,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.65 }}
-            className="flex gap-3 justify-center mb-20"
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-20"
           >
             <motion.a
               href="https://bizbrain-xi.vercel.app/register"
@@ -215,7 +215,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '155px 1fr', padding: 20, gap: 16 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,155px) 1fr', padding: 20, gap: 16, overflowX: 'auto' }}></div>
                 <div style={{ borderRight: '1px solid rgba(255,255,255,0.04)', paddingRight: 14 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24 }}>
                     <div style={{ width: 22, height: 22, background: '#004aad', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 800, color: '#fff', ...syneStyle }}>B</div>

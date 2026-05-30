@@ -50,6 +50,15 @@ h1 {
   font-family: var(--font-syne), Syne, sans-serif !important;
   font-weight: 800;
 }
+@media (max-width: 768px) {
+  .apps-grid { grid-template-columns: 1fr !important; }
+  .pricing-grid { grid-template-columns: 1fr !important; }
+  .footer-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr !important; }
+}
 ::selection { background: rgba(0,74,173,0.3); color: #fff; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #000; }

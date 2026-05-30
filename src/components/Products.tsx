@@ -67,7 +67,8 @@ export default function Products() {
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+        className="apps-grid" 
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}
           {apps.map((app, i) => (
             <motion.div
               key={app.name}
