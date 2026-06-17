@@ -1,0 +1,71 @@
+/* ============================================================
+   LEXORO SOLUTIONS v3 — motion & artistic FX layer
+   GSAP reveals, AI-math flow field, neural hero, custom cursor
+   ============================================================ */
+
+/* scroll progress */
+.scroll-progress{
+  position:fixed; top:0; left:0; height:2px; width:0%;
+  background:linear-gradient(90deg,#1F47E6,#5A8BFF);
+  z-index:80; pointer-events:none; will-change:width;
+}
+
+/* background flow-field canvas */
+#fx-bg{
+  position:fixed; inset:0; width:100%; height:100%;
+  z-index:0; pointer-events:none;
+}
+/* lift all real content above the bg canvas */
+body.fx-on > nav,
+body.fx-on > header,
+body.fx-on > section,
+body.fx-on > footer,
+body.fx-on > .footer{ position:relative; z-index:1; }
+
+/* hero neural-network overlay */
+#fx-hero{
+  position:absolute; inset:0; width:100%; height:100%;
+  z-index:1; pointer-events:none;
+}
+.hero-art .chip,
+.hero-art .mark,
+.hero-art .social{ z-index:3; }
+
+/* custom cursor */
+.cursor-dot, .cursor-ring{
+  position:fixed; top:0; left:0; border-radius:50%;
+  pointer-events:none; z-index:95; transform:translate(-50%,-50%);
+  will-change:transform;
+}
+.cursor-dot{ width:6px; height:6px; background:var(--blue,#1F47E6); }
+.cursor-ring{
+  width:34px; height:34px; border:1.5px solid rgba(var(--blue-rgb,31,71,230),0.45);
+  transition:width .22s var(--ease), height .22s var(--ease),
+             background-color .22s var(--ease), border-color .22s var(--ease);
+}
+.cursor-ring.hover{ width:54px; height:54px; background:rgba(var(--blue-rgb,31,71,230),0.07); border-color:rgba(var(--blue-rgb,31,71,230),0.55); }
+.cursor-ring.down{ width:24px; height:24px; background:rgba(var(--blue-rgb,31,71,230),0.12); }
+.cursor-ring.on-dark{ border-color:rgba(255,255,255,0.6); }
+.cursor-ring.on-dark.hover{ background:rgba(255,255,255,0.08); }
+.cursor-dot.on-dark{ background:#fff; }
+
+/* accent-driven hue shift on the blue hero artwork so it tracks the brand accent */
+.hero-art img.bg, .about-vis img{
+  filter: hue-rotate(var(--art-hue,0deg)) saturate(var(--art-sat,1));
+  transition: filter .5s var(--ease);
+}
+
+/* hide native cursor only when custom is active */
+body.fx-cursor, body.fx-cursor *{ cursor:none !important; }
+@media (hover:none),(pointer:coarse){ .cursor-dot,.cursor-ring{ display:none !important; } }
+
+/* GSAP owns reveal timing — kill the CSS transition to avoid double-easing */
+body.fx-on .reveal{ transition:none; }
+
+/* magnetic targets keep their own transform via GSAP */
+.magnetic{ will-change:transform; }
+
+@media (prefers-reduced-motion:reduce){
+  #fx-bg, #fx-hero, .cursor-dot, .cursor-ring, .scroll-progress{ display:none !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+}
