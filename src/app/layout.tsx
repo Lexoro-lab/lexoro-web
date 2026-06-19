@@ -17,14 +17,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lexoro Solutions — AI Software for GCC Businesses",
-  description: "Lexoro builds vertical AI products for GCC businesses.",
+  title: "Lexoro Solutions — WhatsApp AI automation for business",
+  description:
+    "Lexoro Solutions builds WhatsApp-first AI automation for clinics and SMEs across the UAE — appointment chatbots, accounting, and management dashboards.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${syne.variable} ${inter.variable}`}>
-      <body style={{ fontFamily: 'var(--font-inter), sans-serif' }}>{children}</body>
+      {/* Body font is set per-design in globals.css (Switzer); the /bizbrain
+          route + shared components still use the Syne/Inter CSS variables above. */}
+      <body>{children}</body>
     </html>
   );
 }
