@@ -3,11 +3,29 @@
 import { useState } from 'react'
 import Script from 'next/script'
 
+// Exact load order required by the V4 design:
+// gsap -> ScrollTrigger -> three.js -> fx.js -> theme.js -> i18n.js
+// -> main-v3.js -> creative-fx.js -> live-demo.js -> calc.js
+// Scripts read window.gsap / window.ScrollTrigger / window.THREE as globals,
+// so we load them strictly sequentially via an advancing index.
+const SCRIPTS = [
+  'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+  '/fx.js',
+  '/theme.js',
+  '/i18n.js',
+  '/main-v3.js',
+  '/creative-fx.js',
+  '/live-demo.js',
+  '/calc.js',
+]
+
 export default function Home() {
-  // Load order matters: gsap -> ScrollTrigger -> fx.js -> main-v3.js.
-  // main-v3.js reads window.gsap + window.ScrollTrigger as globals.
-  const [gsapReady, setGsapReady] = useState(false)
-  const [stReady, setStReady] = useState(false)
+  // Number of scripts cleared to render. Each one advances the chain on load
+  // (or error, so a flaky CDN can't stall the rest).
+  const [loaded, setLoaded] = useState(0)
+  const advance = (i: number) => setLoaded((n) => (n === i ? n + 1 : n))
 
   return (
     <>
@@ -17,7 +35,7 @@ export default function Home() {
       {/* ============ NAV ============ */}
       <nav className="nav" id="nav">
         <div className="nav-inner">
-          <a href="#top" aria-label="Lexoro"><img src="/assets/lexoro-logo-dark.png" alt="Lexoro" className="nav-logo" /></a>
+          <a href="#top" aria-label="Lexoro" className="brand-word">lexoro</a>
           <div className="nav-tabs">
             <a href="#products">Products</a>
             <a href="#how">How it works</a>
@@ -27,8 +45,32 @@ export default function Home() {
           </div>
           <div className="nav-right">
             <a href="#contact" className="signin">Sign in</a>
+            <button className="nav-icon" data-theme-btn="" aria-label="Switch to dark theme" aria-pressed="false">
+              <svg className="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4.2" /><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" /></svg>
+              <svg className="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg>
+            </button>
+            <button className="nav-lang" data-lang-btn="" aria-label="التبديل إلى العربية">ع</button>
             <a href="#contact" className="btn btn-primary">Book a demo</a>
+            <button className="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+              <span></span><span></span><span></span>
+            </button>
           </div>
+        </div>
+        <div className="nav-mobile" id="navMobile">
+          <a href="#products">Products</a>
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#industries">Industries</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#playground">Live demo</a>
+          <div className="nav-mobile-row">
+            <button className="nav-icon" data-theme-btn="" aria-label="Switch to dark theme">
+              <svg className="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4.2" /><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" /></svg>
+              <svg className="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg>
+            </button>
+            <button className="nav-lang" data-lang-btn="">ع</button>
+          </div>
+          <a href="#contact" className="btn btn-blue btn-lg nav-mobile-cta">Book a demo</a>
         </div>
       </nav>
 
@@ -284,6 +326,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ============ AI BURST (interactive) ============ */}
+      <section className="burst-sec" data-screen-label="Intelligence">
+        <div className="burst-stage">
+          <canvas id="fx-burst"></canvas>
+          <div className="burst-fade"></div>
+        </div>
+        <div className="wrap burst-copy">
+          <span className="eyebrow reveal">The intelligence layer</span>
+          <h2 className="reveal d1">One model. Every conversation,<br />understood in milliseconds.</h2>
+          <p className="lead reveal d2">Lexoro reads intent, language and context across every message — then routes, replies, books and logs automatically. Thousands of conversations fan out from a single engine, tuned for Arabic and English alike.</p>
+          <div className="burst-stats reveal d2">
+            <div className="bstat"><b data-count="40" data-suffix="+">0+</b><span>languages &amp; dialects</span></div>
+            <div className="bstat"><b data-count="120" data-suffix="ms">0ms</b><span>median response</span></div>
+            <div className="bstat"><b data-count="83" data-suffix="%">0%</b><span>resolved without a human</span></div>
+          </div>
+        </div>
+      </section>
+
       {/* ============ SHOWCASE (chat demo) ============ */}
       <section className="section-pad" style={{ background: 'var(--bg-soft)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }} data-screen-label="Product showcase">
         <div className="wrap">
@@ -316,6 +376,47 @@ export default function Home() {
                     <span className="in">Type a message…</span>
                     <span className="snd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg></span>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ LIVE AI PLAYGROUND ============ */}
+      <section className="section-pad live-sec" id="playground" data-screen-label="Live AI playground">
+        <div className="wrap">
+          <div className="showcase live-grid">
+            <div className="sc-copy reveal">
+              <span className="eyebrow"><span className="eb-live">●</span> Live · powered by real AI</span>
+              <h2>Don&apos;t take our word for it.<br />Talk to Lexoro yourself.</h2>
+              <p>This is the actual assistant — not a recording. Ask it to book a dental visit, quote a cleaning, or message it in Arabic. It answers in real time, exactly like it would on your customers&apos; WhatsApp.</p>
+              <div className="live-suggest" id="live-suggestions">
+                <span className="lsuggest-lbl">Try asking:</span>
+                <button className="lchip">I need a dental cleaning this week</button>
+                <button className="lchip">How much is teeth whitening?</button>
+                <button className="lchip">أريد حجز موعد غدًا</button>
+                <button className="lchip">Do you open on Fridays?</button>
+              </div>
+              <p className="live-note">Responses are generated live and may vary. No data is stored.</p>
+            </div>
+            <div className="phone-wrap reveal d1">
+              <div className="phone-glow"></div>
+              <div className="phone">
+                <div className="phone-screen">
+                  <div className="wa-head">
+                    <span className="wa-av">B</span>
+                    <span><span className="nm" style={{ display: 'block' }}>Bright Smile Clinic</span><span className="st">Lexoro AI · online</span></span>
+                    <span className="ic">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M23 7l-7 5 7 5V7zM1 5h15v14H1z" /></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.4 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z" /></svg>
+                    </span>
+                  </div>
+                  <div className="wa-body" id="live-chat"></div>
+                  <form className="wa-foot live-foot" id="live-form" autoComplete="off">
+                    <input type="text" placeholder="Type a message…" aria-label="Message Lexoro" maxLength={180} />
+                    <button type="submit" className="snd" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg></button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -365,6 +466,48 @@ export default function Home() {
               <div className="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z" /></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z" /></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z" /></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z" /></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z" /></svg></div>
               <p className="q">&quot;The hand-off is what sold us. The AI handles the routine, and the moment a patient needs a person, my team picks up right where it left off.&quot;</p>
               <div className="who"><span className="av" style={{ background: 'linear-gradient(135deg,#0A0A0B,#3A3A40)' }}>SM</span><div><div className="n">Sara Mansour</div><div className="r">NoorCare Group · Abu Dhabi</div></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SAVINGS CALCULATOR ============ */}
+      <section className="section-pad calc-sec" style={{ background: 'var(--bg-soft)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }} data-screen-label="Savings calculator">
+        <div className="wrap">
+          <div className="shead center reveal">
+            <span className="eyebrow">Run the numbers</span>
+            <h2>See what Lexoro saves you every month.</h2>
+          </div>
+          <div className="calc reveal d1" id="calc">
+            <div className="calc-controls">
+              <div className="cctrl">
+                <div className="cc-top"><label>WhatsApp conversations / day</label><b data-v="msgs">120</b></div>
+                <input type="range" data-s="msgs" min="20" max="800" step="10" defaultValue="120" />
+              </div>
+              <div className="cctrl">
+                <div className="cc-top"><label>Avg. handling time each</label><b data-v="mins">6 min</b></div>
+                <input type="range" data-s="mins" min="2" max="20" step="1" defaultValue="6" />
+              </div>
+              <div className="cctrl">
+                <div className="cc-top"><label>Team cost per hour</label><b data-v="cost">AED 55</b></div>
+                <input type="range" data-s="cost" min="20" max="200" step="5" defaultValue="55" />
+              </div>
+              <div className="calc-auto">
+                <div className="ca-row"><span>Resolved by AI, no human needed</span><b>83%</b></div>
+                <div className="ca-bar"><span data-o="bar"></span></div>
+              </div>
+            </div>
+            <div className="calc-results">
+              <div className="cres hero-res">
+                <span className="cr-k">Saved every month</span>
+                <span className="cr-v"><i className="cr-cur">AED</i><b data-o="aed">0</b></span>
+              </div>
+              <div className="cres-grid">
+                <div className="cres"><span className="cr-k">Staff hours freed</span><b data-o="hours">0 hrs</b></div>
+                <div className="cres"><span className="cr-k">Conversations handled</span><b data-o="convos">0</b></div>
+                <div className="cres"><span className="cr-k">After-hours messages caught</span><b data-o="after">0</b></div>
+              </div>
+              <a href="#contact" className="btn btn-blue btn-lg calc-cta">Start saving with Lexoro</a>
             </div>
           </div>
         </div>
@@ -444,8 +587,9 @@ export default function Home() {
               </div>
             </div>
             <div className="about-vis reveal d1">
-              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(70% 70% at 30% 20%, rgba(31,71,230,.55), transparent 60%), linear-gradient(150deg,#0B1A66,#09090B)' }}></div>
-              <img src="/assets/lexoro-logo-white.png" alt="Lexoro" className="mark" />
+              <canvas id="fx-globe"></canvas>
+              <span className="vis-tag"><span className="vt-dot"></span> Live conversation graph</span>
+              <span className="vis-hint">Drag to explore</span>
             </div>
           </div>
         </div>
@@ -475,7 +619,8 @@ export default function Home() {
         <div className="wrap">
           <div className="foot-top">
             <div className="foot-brand">
-              <img src="/assets/lexoro-logo-dark.png" alt="Lexoro" className="flogo" />
+              <img src="/assets/lexoro-logo-dark.png" alt="Lexoro" className="flogo logo-light" />
+              <img src="/assets/lexoro-logo-white.png" alt="Lexoro" className="flogo logo-dark" />
               <p>WhatsApp-first AI automation for clinics and SMEs across the UAE and GCC.</p>
               <form className="news" onSubmit={(e) => e.preventDefault()}>
                 <input type="email" placeholder="Your work email" aria-label="Email" />
@@ -515,21 +660,19 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* ============ SCRIPTS (ordered: gsap -> ScrollTrigger -> fx.js -> main-v3.js) ============ */}
-      <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        strategy="afterInteractive"
-        onLoad={() => setGsapReady(true)}
-      />
-      {gsapReady && (
+      {/* ============ SCRIPTS ============
+          Exact order: gsap -> ScrollTrigger -> three.js -> fx.js -> theme.js
+          -> i18n.js -> main-v3.js -> creative-fx.js -> live-demo.js -> calc.js
+          Each script renders only after the previous has loaded. */}
+      {SCRIPTS.slice(0, loaded + 1).map((src, i) => (
         <Script
-          src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+          key={src}
+          src={src}
           strategy="afterInteractive"
-          onLoad={() => setStReady(true)}
+          onLoad={() => advance(i)}
+          onError={() => advance(i)}
         />
-      )}
-      {stReady && <Script src="/fx.js" strategy="afterInteractive" />}
-      {stReady && <Script src="/main-v3.js" strategy="afterInteractive" />}
+      ))}
     </>
   )
 }
