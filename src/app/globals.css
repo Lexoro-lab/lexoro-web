@@ -633,7 +633,7 @@ h1,h2,h3,h4{ font-weight:600; letter-spacing:-0.028em; line-height:1.05; }
 @media (max-width:960px){
   .hero-grid{ grid-template-columns:1fr; }
   .hero-left{ padding:20px 0 44px; }
-  .hero-art{ min-height:420px; order:-1; }
+  .hero-art{ min-height:420px; order:2; }
   .showcase,.about,.calc{ grid-template-columns:1fr; gap:44px; }
   .products,.bento,.ind-grid,.tgrid,.price-grid{ grid-template-columns:1fr 1fr; }
   .steps{ grid-template-columns:1fr 1fr; }
@@ -1118,3 +1118,15 @@ body.fx-on .reveal{ transition:none; }
 .btn-primary:hover { box-shadow: var(--sh-md) !important; filter: brightness(1.08); }
 .btn-blue:hover { box-shadow: 0 8px 22px -10px rgba(31,71,230,.5) !important; filter: brightness(1.05); }
 .btn-secondary:hover { box-shadow: var(--sh-sm) !important; }
+
+/* Nav image logo sizing + theme swap */
+.nav-logo { height: 26px; width: auto; display: block; }
+.logo-dark { display: none; }
+[data-theme="dark"] .logo-light { display: none; }
+[data-theme="dark"] .logo-dark { display: block; }
+
+/* Nav image logo sizing + theme swap */
+.nav-logo { height: 26px; width: auto; display: block; }
+.logo-dark { display: none; }
+[data-theme="dark"] .logo-light { display: none; }
+[data-theme="dark"] .logo-dark { display: block; }
