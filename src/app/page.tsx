@@ -35,7 +35,10 @@ export default function Home() {
       {/* ============ NAV ============ */}
       <nav className="nav" id="nav">
         <div className="nav-inner">
-          <a href="#top" aria-label="Lexoro" className="brand-word">lexoro</a>
+          <a href="#top" aria-label="Lexoro" className="nav-brand">
+            <img src="/assets/lexoro-logo-dark.png" alt="Lexoro" className="nav-logo logo-light" />
+            <img src="/assets/lexoro-logo-white.png" alt="Lexoro" className="nav-logo logo-dark" />
+          </a>
           <div className="nav-tabs">
             <a href="#products">Products</a>
             <a href="#how">How it works</a>
