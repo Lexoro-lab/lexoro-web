@@ -8,7 +8,6 @@ const syne = Syne({
   variable: "--font-syne",
   display: "swap",
 });
-
 const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
@@ -17,16 +16,51 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lexoro Solutions — WhatsApp AI automation for business",
+  metadataBase: new URL("https://lexoro-web.vercel.app"),
+  title: "Lexoro Solutions — WhatsApp AI that runs your front desk",
   description:
-    "Lexoro Solutions builds WhatsApp-first AI automation for clinics and SMEs across the UAE — appointment chatbots, accounting, and management dashboards.",
+    "Lexoro Solutions builds WhatsApp-first AI agents for clinics and SMEs across the UAE — book appointments, answer customers, and keep the books, automatically.",
+  keywords: [
+    "WhatsApp AI", "AI receptionist UAE", "clinic automation", "appointment booking bot",
+    "WhatsApp business automation", "Dubai AI", "SME automation UAE", "Lexoro",
+  ],
+  authors: [{ name: "Lexoro Solutions" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://lexoro-web.vercel.app",
+    siteName: "Lexoro Solutions",
+    title: "Lexoro Solutions — WhatsApp AI that runs your front desk",
+    description:
+      "WhatsApp-first AI agents for UAE clinics and SMEs — book appointments, answer customers, and keep the books, automatically.",
+    images: [
+      {
+        url: "/assets/lexoro-logo-dark.png",
+        width: 573,
+        height: 250,
+        alt: "Lexoro Solutions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lexoro Solutions — WhatsApp AI that runs your front desk",
+    description:
+      "WhatsApp-first AI agents for UAE clinics and SMEs — book appointments, answer customers, and keep the books.",
+    images: ["/assets/lexoro-logo-dark.png"],
+  },
+  icons: {
+    icon: "/assets/lexoro-logo-dark.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${syne.variable} ${inter.variable}`}>
-      {/* Body font is set per-design in globals.css (Switzer); the /bizbrain
-          route + shared components still use the Syne/Inter CSS variables above. */}
       <body>{children}</body>
     </html>
   );
