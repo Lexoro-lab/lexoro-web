@@ -177,7 +177,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-20"
           >
             <motion.a
-              href="https://bizbrain-xi.vercel.app/register"
+              href="https://app.lexorosolutions.com/register"
               whileHover={{ scale: 1.02, boxShadow: '0 20px 50px rgba(0,74,173,0.55), 0 0 80px rgba(0,74,173,0.2)' }}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-3.5 text-white font-semibold text-[15px] rounded-xl flex items-center gap-2.5"

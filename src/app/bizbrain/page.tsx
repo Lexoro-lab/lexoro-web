@@ -198,7 +198,7 @@ export default function BizBrainPage() {
             style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}
           >
             <motion.a
-              href="https://bizbrain-xi.vercel.app/register"
+              href="https://app.lexorosolutions.com/register"
               whileHover={{ scale: 1.02, boxShadow: '0 20px 50px rgba(0,74,173,0.55)' }}
               whileTap={{ scale: 0.98 }}
               style={{
@@ -411,7 +411,7 @@ export default function BizBrainPage() {
               Simple pricing, no surprises
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.48)', fontWeight: 300 }}>
-              All plans include a 14-day free trial. No credit card required.
+              All plans include a 7-day free trial. No credit card required.
             </p>
           </motion.div>
 
@@ -464,7 +464,7 @@ export default function BizBrainPage() {
                   </div>
                 ))}
                 <motion.a
-                  href="https://bizbrain-xi.vercel.app/register"
+                  href="https://app.lexorosolutions.com/register"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   style={{
@@ -516,11 +516,11 @@ export default function BizBrainPage() {
             Automate your clinic.<br />Start today.
           </h2>
           <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.48)', lineHeight: 1.75, fontWeight: 300, marginBottom: 40 }}>
-            14-day free trial. No credit card required. Set up in under 10 minutes.
+            7-day free trial. No credit card required. Set up in under 10 minutes.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <motion.a
-              href="https://bizbrain-xi.vercel.app/register"
+              href="https://app.lexorosolutions.com/register"
               whileHover={{ scale: 1.02, boxShadow: '0 24px 60px rgba(0,74,173,0.6)' }}
               whileTap={{ scale: 0.98 }}
               style={{
@@ -534,7 +534,7 @@ export default function BizBrainPage() {
               Start free trial →
             </motion.a>
             <motion.a
-              href="https://bizbrain-xi.vercel.app/login"
+              href="https://app.lexorosolutions.com/login"
               whileHover={{ scale: 1.02, background: 'rgba(255,255,255,0.07)' }}
               whileTap={{ scale: 0.98 }}
               style={{

@@ -166,7 +166,7 @@ export default function Pricing() {
                 ))}
 
                 <motion.a
-                  href="https://bizbrain-xi.vercel.app/register"
+                  href="https://app.lexorosolutions.com/register"
                   whileHover={{ scale: 1.02, opacity: 0.9 }}
                   whileTap={{ scale: 0.98 }}
                   style={{

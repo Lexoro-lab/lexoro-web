@@ -52,13 +52,13 @@ export default function Navbar() {
         {/* Desktop buttons */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://bizbrain-xi.vercel.app/login"
+            href="https://app.lexorosolutions.com/login"
             className="text-sm text-white/55 hover:text-white px-4 py-2 rounded-lg border border-white/10 hover:border-white/22 transition-all duration-200"
           >
             Sign in
           </a>
           <motion.a
-            href="https://bizbrain-xi.vercel.app/register"
+            href="https://app.lexorosolutions.com/register"
             whileHover={{ scale: 1.02, boxShadow: '0 0 28px rgba(0,74,173,0.5)' }}
             whileTap={{ scale: 0.98 }}
             className="text-sm font-semibold text-white px-5 py-2 rounded-lg transition-all duration-200"
@@ -106,13 +106,13 @@ export default function Navbar() {
               ))}
               <div className="border-t border-white/[0.07] pt-4 flex flex-col gap-3">
                 <a
-                  href="https://bizbrain-xi.vercel.app/login"
+                  href="https://app.lexorosolutions.com/login"
                   className="text-sm text-white/55 text-center py-2.5 rounded-lg border border-white/10"
                 >
                   Sign in
                 </a>
                 <a
-                  href="https://bizbrain-xi.vercel.app/register"
+                  href="https://app.lexorosolutions.com/register"
                   className="text-sm font-semibold text-white text-center py-2.5 rounded-lg"
                   style={{ background: 'linear-gradient(135deg, #004aad, #0063dd)' }}
                 >

@@ -53,7 +53,7 @@ export default function Home() {
               <svg className="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" /></svg>
             </button>
             <button className="nav-lang" data-lang-btn="" aria-label="التبديل إلى العربية">ع</button>
-            <a href="https://bizbrain-xi.vercel.app/register" className="btn btn-primary">Book a demo</a>
+            <a href="https://app.lexorosolutions.com/register" className="btn btn-primary">Book a demo</a>
             <button className="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
               <span></span><span></span><span></span>
             </button>
@@ -73,7 +73,7 @@ export default function Home() {
             </button>
             <button className="nav-lang" data-lang-btn="">ع</button>
           </div>
-          <a href="https://bizbrain-xi.vercel.app/register" className="btn btn-blue btn-lg nav-mobile-cta">Book a demo</a>
+          <a href="https://app.lexorosolutions.com/register" className="btn btn-blue btn-lg nav-mobile-cta">Book a demo</a>
         </div>
       </nav>
 
@@ -95,7 +95,7 @@ export default function Home() {
               <h1 className="reveal d1">WhatsApp AI that runs your <em>front desk</em> and your <em>back office.</em></h1>
               <p className="hero-sub reveal d2">Lexoro Solutions builds WhatsApp-first AI agents that book appointments, answer customers and keep the books — purpose-built for businesses across the UAE.</p>
               <div className="hero-cta reveal d3">
-                <a href="https://bizbrain-xi.vercel.app/register" className="btn btn-primary btn-lg">Book a demo</a>
+                <a href="https://app.lexorosolutions.com/register" className="btn btn-primary btn-lg">Book a demo</a>
                 <a href="#products" className="btn btn-secondary btn-lg">Explore products</a>
               </div>
               <div className="hero-meta reveal d4">
@@ -535,7 +535,7 @@ export default function Home() {
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Core AI + dashboard</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Email support</li>
               </ul>
-              <a href="https://bizbrain-xi.vercel.app/register?plan=starter" className="btn btn-secondary">Get started</a>
+              <a href="https://app.lexorosolutions.com/register?plan=starter" className="btn btn-secondary">Get started</a>
             </div>
             <div className="plan pop reveal d1">
               <span className="ptag">Most popular</span>
@@ -548,7 +548,7 @@ export default function Home() {
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Human hand-off + team inbox</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Integrations &amp; priority support</li>
               </ul>
-              <a href="https://bizbrain-xi.vercel.app/register?plan=growth" className="btn btn-primary">Book a demo</a>
+              <a href="https://app.lexorosolutions.com/register?plan=growth" className="btn btn-primary">Book a demo</a>
             </div>
             <div className="plan reveal d2">
               <div className="pname">Enterprise</div>
@@ -560,7 +560,7 @@ export default function Home() {
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Dedicated success manager</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>SLA &amp; onboarding</li>
               </ul>
-              <a href="https://bizbrain-xi.vercel.app/register?plan=enterprise" className="btn btn-secondary">Talk to sales</a>
+              <a href="https://app.lexorosolutions.com/register?plan=enterprise" className="btn btn-secondary">Talk to sales</a>
             </div>
           </div>
         </div>
@@ -607,7 +607,7 @@ export default function Home() {
             <h2>Ready to put WhatsApp to work?</h2>
             <p>Book a 20-minute demo and we&apos;ll show Lexoro running live on your business — bookings, hand-off and dashboard included.</p>
             <div className="cta-actions">
-              <a href="https://bizbrain-xi.vercel.app/register" className="btn btn-blue btn-lg">Book a demo</a>
+              <a href="https://app.lexorosolutions.com/register" className="btn btn-blue btn-lg">Book a demo</a>
               <a href="#" className="btn btn-ghost-dark btn-lg">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.9.9-2.8-.2-.3A8 8 0 1112 20zm4.5-5.6c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 01-1.9-1.2 7.3 7.3 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z" /></svg>
                 Chat on WhatsApp
@@ -642,7 +642,7 @@ export default function Home() {
               <a href="#about">About</a>
               <a href="#industries">Industries</a>
               <a href="#contact">Contact</a>
-              <a href="https://bizbrain-xi.vercel.app/register">Book a demo</a>
+              <a href="https://app.lexorosolutions.com/register">Book a demo</a>
             </div>
             <div className="fcol">
               <h5>Resources</h5>
