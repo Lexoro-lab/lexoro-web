@@ -1,5 +1,6 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -89,30 +90,6 @@ const steps = [
   },
 ]
 
-const plans = [
-  {
-    name: 'Starter',
-    price: 299,
-    desc: 'Small clinics, 1–2 doctors',
-    popular: false,
-    features: ['WhatsApp AI booking', 'Auto reminders', 'Arabic + English', '500 conversations/mo', 'Basic dashboard', 'Email support'],
-  },
-  {
-    name: 'Growth',
-    price: 799,
-    desc: 'Growing clinics, up to 5 doctors',
-    popular: true,
-    features: ['Everything in Starter', 'Human handoff inbox', 'Broadcast messaging', 'Unlimited conversations', 'Schedule manager', 'Priority support'],
-  },
-  {
-    name: 'Enterprise',
-    price: 1999,
-    desc: 'Hospital groups, multi-branch',
-    popular: false,
-    features: ['Everything in Growth', 'Multi-branch support', 'Custom AI persona', 'Analytics dashboard', 'API access', 'Dedicated support'],
-  },
-]
-
 const stats = [
   { value: '200+', label: 'Clinics in GCC' },
   { value: '10k+', label: 'Bookings per month' },
@@ -121,6 +98,9 @@ const stats = [
 ]
 
 export default function BizBrainPage() {
+  const [billingInterval, setBillingInterval] = useState<'monthly' | 'yearly'>('monthly')
+  const isYearly = billingInterval === 'yearly'
+
   return (
     <div style={{ background: '#020204', minHeight: '100vh', color: '#fff' }}>
       <Navbar />
@@ -411,77 +391,135 @@ export default function BizBrainPage() {
               Simple pricing, no surprises
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.48)', fontWeight: 300 }}>
-              All plans include a 7-day free trial. No credit card required.
+              Includes a 7-day free trial. No credit card required.
             </p>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
-            {plans.map((plan, i) => (
-              <motion.div
-                key={plan.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+          {/* Billing toggle */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            style={{ display: 'flex', justifyContent: 'center', marginBottom: 40 }}
+          >
+            <div style={{
+              display: 'inline-flex', gap: 4, padding: 5, borderRadius: 14,
+              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)',
+            }}>
+              <button
+                onClick={() => setBillingInterval('monthly')}
                 style={{
-                  padding: 30, borderRadius: 22,
-                  background: plan.popular
-                    ? 'linear-gradient(160deg, rgba(0,74,173,0.18) 0%, rgba(0,74,173,0.06) 100%)'
-                    : 'rgba(255,255,255,0.02)',
-                  border: `1px solid ${plan.popular ? 'rgba(0,74,173,0.5)' : 'rgba(255,255,255,0.09)'}`,
-                  position: 'relative',
-                  boxShadow: plan.popular ? '0 0 70px rgba(0,74,173,0.18), 0 24px 48px rgba(0,0,0,0.3)' : 'none',
+                  padding: '9px 24px', borderRadius: 10, fontSize: 13, fontWeight: 500,
+                  cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.22s ease', border: 'none',
+                  background: !isYearly ? 'linear-gradient(135deg, #004aad, #0063dd)' : 'transparent',
+                  color: !isYearly ? '#fff' : 'rgba(255,255,255,0.45)',
+                  boxShadow: !isYearly ? '0 4px 16px rgba(0,74,173,0.4)' : 'none',
                 }}
               >
-                {plan.popular && (
-                  <div style={{
-                    display: 'inline-block', background: '#004aad', color: '#fff',
-                    fontSize: 10, fontWeight: 700, padding: '3px 11px', borderRadius: 6,
-                    letterSpacing: '0.08em', marginBottom: 14,
-                    boxShadow: '0 4px 12px rgba(0,74,173,0.5)',
-                  }}>
-                    MOST POPULAR
+                Monthly
+              </button>
+              <button
+                onClick={() => setBillingInterval('yearly')}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '9px 24px', borderRadius: 10, fontSize: 13, fontWeight: 500,
+                  cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.22s ease', border: 'none',
+                  background: isYearly ? 'linear-gradient(135deg, #004aad, #0063dd)' : 'transparent',
+                  color: isYearly ? '#fff' : 'rgba(255,255,255,0.45)',
+                  boxShadow: isYearly ? '0 4px 16px rgba(0,74,173,0.4)' : 'none',
+                }}
+              >
+                Yearly
+                <span style={{
+                  fontSize: 10, fontWeight: 700, letterSpacing: '0.04em',
+                  padding: '2px 8px', borderRadius: 20,
+                  background: isYearly ? 'rgba(255,255,255,0.2)' : 'rgba(34,197,94,0.12)',
+                  color: isYearly ? '#fff' : '#4ade80',
+                  border: isYearly ? '1px solid rgba(255,255,255,0.25)' : '1px solid rgba(34,197,94,0.25)',
+                }}>
+                  Save 17%
+                </span>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Single plan card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            style={{
+              maxWidth: 420, margin: '0 auto',
+              padding: 34, borderRadius: 22,
+              background: 'linear-gradient(160deg, rgba(0,74,173,0.18) 0%, rgba(0,74,173,0.06) 100%)',
+              border: '1px solid rgba(0,74,173,0.5)',
+              position: 'relative',
+              boxShadow: '0 0 70px rgba(0,74,173,0.18), 0 24px 48px rgba(0,0,0,0.3)',
+            }}
+          >
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 16 }}>
+              BizBrain
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={billingInterval}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.22 }}
+                style={{ marginBottom: 26 }}
+              >
+                {isYearly && (
+                  <div style={{ ...syneStyle, fontSize: 18, fontWeight: 700, color: 'rgba(255,255,255,0.35)', textDecoration: 'line-through', letterSpacing: '-0.5px', marginBottom: 2 }}>
+                    AED 299
                   </div>
                 )}
-                <div style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 16 }}>
-                  {plan.name}
+                <div style={{ ...syneStyle, fontSize: 44, fontWeight: 800, color: '#fff', letterSpacing: '-2px', lineHeight: 1 }}>
+                  AED {isYearly ? 249 : 299}
+                  <span style={{ fontSize: 15, fontWeight: 400, color: 'rgba(255,255,255,0.4)', letterSpacing: 0 }}>/month</span>
                 </div>
-                <div style={{ ...syneStyle, fontSize: 40, fontWeight: 800, color: '#fff', letterSpacing: '-2px', lineHeight: 1, marginBottom: 5 }}>
-                  AED {plan.price}
-                  <span style={{ fontSize: 14, fontWeight: 400, color: 'rgba(255,255,255,0.4)', letterSpacing: 0 }}>/mo</span>
-                </div>
-                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', marginBottom: 26 }}>{plan.desc}</div>
-                <div style={{ height: 1, background: 'rgba(255,255,255,0.07)', marginBottom: 22 }} />
-                {plan.features.map(f => (
-                  <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 13, color: 'rgba(255,255,255,0.6)', marginBottom: 12 }}>
-                    <span style={{
-                      width: 16, height: 16, borderRadius: '50%', flexShrink: 0,
-                      background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)',
-                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                      color: '#4ade80', fontSize: 9,
-                    }}>✓</span>
-                    {f}
+                {isYearly && (
+                  <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', marginTop: 10 }}>
+                    Billed AED 2,990/year — 2 months free
                   </div>
-                ))}
-                <motion.a
-                  href="https://app.lexorosolutions.com/register"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  style={{
-                    display: 'block', textAlign: 'center', textDecoration: 'none',
-                    width: '100%', padding: '12px', borderRadius: 10, marginTop: 26,
-                    fontSize: 13, fontWeight: 600, fontFamily: 'inherit', transition: 'all 0.2s',
-                    background: plan.popular ? 'linear-gradient(135deg, #004aad, #0063dd)' : 'transparent',
-                    color: plan.popular ? '#fff' : 'rgba(255,255,255,0.55)',
-                    border: plan.popular ? 'none' : '1px solid rgba(255,255,255,0.13)',
-                    boxShadow: plan.popular ? '0 8px 24px rgba(0,74,173,0.4)' : 'none',
-                  }}
-                >
-                  {plan.popular ? 'Get started →' : 'Get started'}
-                </motion.a>
+                )}
               </motion.div>
+            </AnimatePresence>
+
+            <div style={{ height: 1, background: 'rgba(255,255,255,0.07)', marginBottom: 22 }} />
+
+            {['Unlimited patient bookings', 'AI WhatsApp reception', 'Appointment reminders & confirmations', 'Doctor scheduling', 'Real-time dashboard', 'Arabic & English support', 'Staff handoff'].map(f => (
+              <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 13, color: 'rgba(255,255,255,0.6)', marginBottom: 12 }}>
+                <span style={{
+                  width: 16, height: 16, borderRadius: '50%', flexShrink: 0,
+                  background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#4ade80', fontSize: 9,
+                }}>✓</span>
+                {f}
+              </div>
             ))}
-          </div>
+
+            <motion.a
+              href={`https://app.lexorosolutions.com/register?billing=${billingInterval}`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                display: 'block', textAlign: 'center', textDecoration: 'none',
+                width: '100%', padding: '13px', borderRadius: 10, marginTop: 28,
+                fontSize: 13, fontWeight: 600, fontFamily: 'inherit', transition: 'all 0.2s',
+                boxSizing: 'border-box',
+                background: 'linear-gradient(135deg, #004aad, #0063dd)',
+                color: '#fff', border: 'none',
+                boxShadow: '0 8px 24px rgba(0,74,173,0.4)',
+              }}
+            >
+              Start 7-day free trial →
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
