@@ -27,6 +27,9 @@ export default function Home() {
   const [loaded, setLoaded] = useState(0)
   const advance = (i: number) => setLoaded((n) => (n === i ? n + 1 : n))
 
+  const [billingInterval, setBillingInterval] = useState<'monthly' | 'yearly'>('monthly')
+  const isYearly = billingInterval === 'yearly'
+
   return (
     <>
       <div className="scroll-progress"></div>
@@ -521,46 +524,103 @@ export default function Home() {
         <div className="wrap">
           <div className="shead center reveal">
             <span className="eyebrow">Simple, transparent pricing</span>
-            <h2>Start small. Scale when you&apos;re ready.</h2>
-            <p>Plans in AED, billed monthly. No setup fees — cancel anytime.</p>
+            <h2>One plan. Everything included.</h2>
+            <p>Plans in AED. No setup fees — cancel anytime.</p>
           </div>
-          <div className="price-grid">
-            <div className="plan reveal">
-              <div className="pname">Starter</div>
-              <div className="pdesc">For a single clinic or small business getting started.</div>
-              <div className="pamt"><span className="pcur">AED</span>299<span className="per"> /mo</span></div>
-              <ul>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>1 WhatsApp number</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Up to 500 conversations / mo</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Core AI + dashboard</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Email support</li>
-              </ul>
-              <a href="https://app.lexorosolutions.com/register?plan=starter" className="btn btn-secondary">Get started</a>
+
+          {/* Monthly / Yearly toggle */}
+          <div
+            className="reveal"
+            style={{ display: 'flex', justifyContent: 'center', marginBottom: 34 }}
+          >
+            <div
+              role="tablist"
+              aria-label="Billing interval"
+              style={{
+                display: 'inline-flex', gap: 4, padding: 5, borderRadius: 100,
+                background: 'var(--bg-soft)', border: '1px solid var(--line)',
+                boxShadow: 'var(--sh-xs)',
+              }}
+            >
+              <button
+                role="tab"
+                aria-selected={!isYearly}
+                onClick={() => setBillingInterval('monthly')}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '9px 22px', borderRadius: 100, border: 'none', cursor: 'pointer',
+                  fontSize: 14, fontWeight: 600, fontFamily: 'inherit',
+                  transition: '.25s var(--ease)',
+                  background: !isYearly ? 'var(--ink)' : 'transparent',
+                  color: !isYearly ? '#fff' : 'var(--muted)',
+                  boxShadow: !isYearly ? 'var(--sh-sm)' : 'none',
+                }}
+              >
+                Monthly
+              </button>
+              <button
+                role="tab"
+                aria-selected={isYearly}
+                onClick={() => setBillingInterval('yearly')}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '9px 22px', borderRadius: 100, border: 'none', cursor: 'pointer',
+                  fontSize: 14, fontWeight: 600, fontFamily: 'inherit',
+                  transition: '.25s var(--ease)',
+                  background: isYearly ? 'var(--ink)' : 'transparent',
+                  color: isYearly ? '#fff' : 'var(--muted)',
+                  boxShadow: isYearly ? 'var(--sh-sm)' : 'none',
+                }}
+              >
+                Yearly
+                <span
+                  style={{
+                    fontSize: 11, fontWeight: 700, letterSpacing: '0.01em',
+                    padding: '2px 8px', borderRadius: 100,
+                    background: isYearly ? 'rgba(255,255,255,0.18)' : 'rgba(21,166,90,0.12)',
+                    color: isYearly ? '#fff' : '#15A65A',
+                  }}
+                >
+                  Save 17%
+                </span>
+              </button>
             </div>
-            <div className="plan pop reveal d1">
-              <span className="ptag">Most popular</span>
-              <div className="pname">Growth</div>
-              <div className="pdesc">For busy clinics and SMEs that live on WhatsApp.</div>
-              <div className="pamt"><span className="pcur">AED</span>799<span className="per"> /mo</span></div>
+          </div>
+
+          {/* Single plan */}
+          <div className="price-grid" style={{ gridTemplateColumns: 'minmax(0, 380px)', justifyContent: 'center' }}>
+            <div className="plan pop reveal">
+              <span className="ptag">7-day free trial</span>
+              <div className="pname">BizBrain</div>
+              <div className="pdesc">Your AI receptionist on WhatsApp — everything included, one simple price.</div>
+              {isYearly && (
+                <div
+                  style={{
+                    fontSize: 20, fontWeight: 600, letterSpacing: '-0.03em',
+                    color: 'var(--muted)', textDecoration: 'line-through', marginBottom: 4,
+                  }}
+                >
+                  <span className="pcur" style={{ textDecoration: 'none' }}>AED</span>299
+                </div>
+              )}
+              <div className="pamt">
+                <span className="pcur">AED</span>{isYearly ? 249 : 299}<span className="per"> /month</span>
+              </div>
+              {isYearly && (
+                <div style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 10 }}>
+                  Billed AED 2,990/year — 2 months free
+                </div>
+              )}
               <ul>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Up to 3 numbers / branches</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Unlimited conversations</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Human hand-off + team inbox</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Integrations &amp; priority support</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Unlimited patient bookings</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>AI WhatsApp reception</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Appointment reminders &amp; confirmations</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Doctor scheduling</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Real-time dashboard</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Arabic &amp; English support</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Staff handoff</li>
               </ul>
-              <a href="https://app.lexorosolutions.com/register?plan=growth" className="btn btn-primary">Book a demo</a>
-            </div>
-            <div className="plan reveal d2">
-              <div className="pname">Enterprise</div>
-              <div className="pdesc">For groups, chains and custom workflows.</div>
-              <div className="pamt">Custom</div>
-              <ul>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Unlimited numbers &amp; branches</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Custom AI workflows</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Dedicated success manager</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>SLA &amp; onboarding</li>
-              </ul>
-              <a href="https://app.lexorosolutions.com/register?plan=enterprise" className="btn btn-secondary">Talk to sales</a>
+              <a href={`https://app.lexorosolutions.com/register?billing=${billingInterval}`} className="btn btn-primary">Start 7-day free trial</a>
             </div>
           </div>
         </div>
