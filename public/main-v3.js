@@ -84,15 +84,15 @@ if (reduce || !window.gsap || !window.ScrollTrigger){
 /* ---------- animated WhatsApp thread ---------- */
 const chat = document.getElementById('chat');
 const chatScript = [
-  { type:'in',  text:"Hi 👋 I'd like to book a dental cleaning this week.", time:'10:24' },
+  { type:'in',  text:"Invoice Gulf Trading 5,000 for consultancy", time:'10:24' },
   { type:'typing', dur:1100 },
-  { type:'out', text:"Of course! Here's what's open at Bright Smile Clinic 🦷", chips:['Wed 3:00 PM','Thu 11:30 AM','Fri 5:15 PM'], time:'10:24' },
-  { type:'in',  text:"Thursday 11:30 works great.", time:'10:25' },
+  { type:'out', text:"Draft ready 🧾 Gulf Trading LLC — Consultancy AED 5,000 + VAT 5% AED 250 = AED 5,250", chips:['Send','Edit'], time:'10:24' },
+  { type:'in',  text:"Send", time:'10:25' },
   { type:'typing', dur:1000 },
-  { type:'out', text:"Booked ✅ Thursday 11:30 AM with Dr. Rana. I'll send a reminder the day before.", time:'10:25' },
-  { type:'in',  text:"Do you accept Daman insurance?", time:'10:26' },
-  { type:'typing', dur:900 },
-  { type:'out', text:"We do! Connecting you with our team to confirm your coverage 👩‍⚕️", time:'10:26' },
+  { type:'out', text:"Sent ✅ INV-0142 delivered as PDF and posted to your ledger. VAT return updated.", time:'10:25' },
+  { type:'in',  text:"📷 Fuel receipt", time:'10:31' },
+  { type:'typing', dur:1200 },
+  { type:'out', text:"Logged AED 120 at ENOC under Fuel & transport. AED 5.71 input VAT is reclaimable ✅", time:'10:31' },
 ];
 const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 function bubble(item){

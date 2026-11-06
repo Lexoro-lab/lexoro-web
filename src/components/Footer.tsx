@@ -2,7 +2,7 @@
 import Logo from './Logo'
 
 const links = {
-  Products: ['BizBrain', 'AccountAI', 'PropAI'],
+  Products: ['Fisqel', 'BizBrain'],
   Company: ['About', 'Blog', 'Careers', 'Contact'],
   Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'],
 }
@@ -32,7 +32,7 @@ export default function Footer() {
           <div>
             <Logo />
             <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, marginTop: 18, maxWidth: 280 }}>
-              Vertical AI products for GCC businesses. Automate the work keeping you from growing.
+              A UAE software company and the parent company of Fisqel and BizBrain.
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
               {socialLinks.map((s) => (
