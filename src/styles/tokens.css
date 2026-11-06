@@ -1,0 +1,144 @@
+/* Lexoro design tokens — built on the Fisqel Design System ("ink and dot").
+
+   The brand is the logo: an ink wordmark and one blue mark (#004aad).
+   The site is quiet neutral paper around those two. Blue is rationed —
+   the dot, a key word, a live signal — so it always means something
+   when it appears.
+
+   Light is the fallback. Dark is the logo's own ink. Any section can
+   switch locally with data-theme="dark". */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --canvas: #fafaf9;
+  --tray: #f1f1ef;
+  --tray-deep: #e7e7e4;
+  --surface: #ffffff;
+  --surface-inset: #f4f4f2;
+
+  --foreground: #13161a;
+  --ink-soft: #2a2e34;
+  --muted-foreground: #4f555c;
+  --subtle-foreground: #646a71;
+
+  --border: #e3e3df;
+  --border-strong: #d2d2cd;
+  --border-control: #868b90;
+
+  /* Action is ink; blue is the accent. */
+  --brand: #13161a;
+  --brand-hover: #2a2e34;
+  --brand-foreground: #ffffff;
+  --brand-text: #0049a8;
+  --brand-tint: #e9f0fb;
+  --brand-line: #bcd0f0;
+  --dot: #004aad;
+  --dot-on-brand: #4d8dff;
+
+  --whatsapp: #128c4a;
+  --whatsapp-hover: #0f7a40;
+  --whatsapp-foreground: #ffffff;
+
+  --chat-canvas: #efe7dc;
+  --chat-bubble-out: #d9fdd3;
+  --chat-bubble-in: #ffffff;
+  --chat-ink: #111b21;
+  --chat-meta: #54656f;
+  --chat-tick: #53bdeb;
+  --chat-chip: #fffaf0;
+  --phone-bezel-from: #2a2d31;
+  --phone-bezel-to: #0b0c0e;
+  --phone-chrome: #f7f5f0;
+  --phone-hairline: rgb(0 0 0 / 0.08);
+  --phone-field: #ffffff;
+
+  --shadow-sm: 0 1px 2px rgb(19 22 26 / 0.06);
+  --shadow-md: 0 1px 2px rgb(19 22 26 / 0.05), 0 6px 16px -8px rgb(19 22 26 / 0.14);
+  --shadow-lg: 0 1px 2px rgb(19 22 26 / 0.05), 0 18px 40px -16px rgb(19 22 26 / 0.2);
+  --shadow-float: 0 1px 2px rgb(19 22 26 / 0.06), 0 30px 70px -24px rgb(19 22 26 / 0.3);
+  --spot: rgb(0 74 173 / 0.07);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #0a0c0f;
+  --tray: #101317;
+  --tray-deep: #15191e;
+  --surface: #14171c;
+  --surface-inset: #0e1114;
+
+  --foreground: #f2f3f5;
+  --ink-soft: #d6d9de;
+  --muted-foreground: #a2a8b0;
+  --subtle-foreground: #858c95;
+
+  --border: #22262c;
+  --border-strong: #2e333a;
+  --border-control: #5f666e;
+
+  --brand: #ffffff;
+  --brand-hover: #e6e8eb;
+  --brand-foreground: #13161a;
+  --brand-text: #85b3ff;
+  --brand-tint: #0f1c33;
+  --brand-line: #1f3f74;
+  --dot: #3d82ff;
+  --dot-on-brand: #004aad;
+
+  --whatsapp: #25a55f;
+  --whatsapp-hover: #2eb86b;
+  --whatsapp-foreground: #04150b;
+
+  --chat-canvas: #0b141a;
+  --chat-bubble-out: #005c4b;
+  --chat-bubble-in: #202c33;
+  --chat-ink: #e9edef;
+  --chat-meta: #8696a0;
+  --chat-tick: #53bdeb;
+  --chat-chip: #182229;
+  --phone-bezel-from: #3a3d41;
+  --phone-bezel-to: #17191b;
+  --phone-chrome: #111b21;
+  --phone-hairline: rgb(255 255 255 / 0.08);
+  --phone-field: #2a3942;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 12px 28px -16px rgb(0 0 0 / 0.7);
+  --shadow-lg: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 28px 56px -28px rgb(0 0 0 / 0.8);
+  --shadow-float: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 50px 100px -20px rgb(0 0 0 / 0.7);
+  --spot: rgb(61 130 255 / 0.1);
+}
+
+:root {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  --font-arabic-stack: var(--font-arabic), var(--font-geist-sans), "Noto Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif;
+
+  --text-hero: clamp(2.75rem, 1.4rem + 3.6vw, 4.1rem);
+  --text-headline: clamp(2rem, 1.35rem + 2.6vw, 3.5rem);
+  --text-subhead: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3125rem);
+  --text-label: 0.75rem;
+
+  --tracking-display: -0.045em;
+  --tracking-headline: -0.035em;
+  --tracking-label: 0.08em;
+
+  --layout-page: min(100% - 2.5rem, 76rem);
+  --layout-reading: 42rem;
+  --layout-section: clamp(5rem, 3rem + 8vw, 10rem);
+  --nav-height: 4rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.375rem;
+
+  --duration-fast: 180ms;
+  --duration-base: 260ms;
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.2, 0.65, 0.3, 1);
+}

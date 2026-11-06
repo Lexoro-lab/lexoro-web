@@ -1,0 +1,321 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* Cascade rule (from the Fisqel system): every rule in this file lives in a
+   layer. An unlayered rule outranks every Tailwind utility and silently
+   breaks them, so never add a bare top-level rule here. */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-foreground: var(--foreground);
+  --color-tray: var(--tray);
+  --color-tray-deep: var(--tray-deep);
+  --color-surface: var(--surface);
+  --color-surface-inset: var(--surface-inset);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-text: var(--brand-text);
+  --color-brand-tint: var(--brand-tint);
+  --color-brand-line: var(--brand-line);
+  --color-dot: var(--dot);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --color-chat-canvas: var(--chat-canvas);
+  --color-chat-out: var(--chat-bubble-out);
+  --color-chat-in: var(--chat-bubble-in);
+  --color-chat-ink: var(--chat-ink);
+  --color-chat-meta: var(--chat-meta);
+  --color-chat-tick: var(--chat-tick);
+  --color-chat-chip: var(--chat-chip);
+  --color-phone-chrome: var(--phone-chrome);
+  --color-phone-field: var(--phone-field);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-float: var(--shadow-float);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    min-width: 0;
+  }
+
+  html {
+    font-size: clamp(1rem, 0.62rem + 0.42vw, 1.25rem);
+    overflow-x: clip;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-height) + 1.5rem);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html[lang="ar"] body {
+    font-family: var(--font-arabic-stack);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    background: var(--canvas);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--brand-tint);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--dot);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  /* Type */
+  .type-hero {
+    font-size: var(--text-hero);
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    line-height: 0.98;
+  }
+  .type-headline {
+    font-size: var(--text-headline);
+    font-weight: 600;
+    letter-spacing: var(--tracking-headline);
+    line-height: 1.05;
+  }
+  .type-subhead {
+    font-size: var(--text-subhead);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+  .type-lead {
+    font-size: var(--text-lead);
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+  }
+  .type-eyebrow {
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: var(--tracking-label);
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  html[lang="ar"] :is(.type-hero, .type-headline, .type-subhead, .type-lead, .type-eyebrow) {
+    letter-spacing: normal;
+    text-transform: none;
+  }
+  html[lang="ar"] :is(.type-hero, .type-headline) {
+    line-height: 1.3;
+  }
+
+  /* Layout shells */
+  .container-page {
+    margin-inline: auto;
+    width: var(--layout-page);
+  }
+  .container-reading {
+    margin-inline: auto;
+    width: min(100% - 2.5rem, var(--layout-reading));
+  }
+  .section-y {
+    padding-block: var(--layout-section);
+  }
+
+  /* Logo: the ink wordmark on paper, the white one on ink. */
+  .logo-on-dark {
+    display: none;
+  }
+  [data-theme="dark"] .logo-on-light {
+    display: none;
+  }
+  [data-theme="dark"] .logo-on-dark {
+    display: block;
+  }
+
+  /* Long-form legal text */
+  .prose-legal {
+    color: var(--ink-soft);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  .prose-legal > * + * {
+    margin-top: 1.1em;
+  }
+  .prose-legal h2 {
+    margin-top: 2.4em;
+    padding-top: 1.4em;
+    border-top: 1px solid var(--border);
+    color: var(--foreground);
+    font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .prose-legal h2 .num {
+    display: block;
+    margin-bottom: 0.4em;
+    color: var(--brand-text);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .prose-legal h3 {
+    margin-top: 1.8em;
+    color: var(--foreground);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .prose-legal strong {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+  .prose-legal a {
+    color: var(--brand-text);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--brand-line);
+  }
+  .prose-legal ul,
+  .prose-legal ol {
+    padding-inline-start: 1.3em;
+  }
+  .prose-legal ul {
+    list-style: disc;
+  }
+  .prose-legal ol {
+    list-style: decimal;
+  }
+  .prose-legal li + li {
+    margin-top: 0.45em;
+  }
+  .prose-legal li::marker {
+    color: var(--subtle-foreground);
+  }
+  .prose-legal table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .prose-legal th,
+  .prose-legal td {
+    padding: 0.7em 0.9em 0.7em 0;
+    border-bottom: 1px solid var(--border);
+    text-align: start;
+    vertical-align: top;
+  }
+  .prose-legal th {
+    color: var(--foreground);
+    font-weight: 600;
+    border-bottom-color: var(--border-strong);
+  }
+  .prose-legal .callout,
+  .prose-legal .box {
+    border: 1px solid var(--border);
+    border-inline-start: 3px solid var(--dot);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    padding: 1.1em 1.3em;
+  }
+  .prose-legal .box p + p {
+    margin-top: 0.6em;
+  }
+}
+
+@layer utilities {
+  /* The dark stage: one light from above, faint ledger lines fading out. */
+  .stage-light {
+    background:
+      radial-gradient(55% 50% at 72% 18%, rgb(255 255 255 / 0.08), transparent 70%),
+      radial-gradient(35% 35% at 72% 70%, rgb(61 130 255 / 0.1), transparent 70%),
+      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px) 0 0 / 100% 32px;
+    -webkit-mask: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+    mask: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+  }
+
+  /* Reveal: content is always readable; it only settles into place. */
+  .js .reveal:not(.is-in) {
+    transform: translateY(16px);
+  }
+  .reveal {
+    transition: transform 700ms var(--ease-entrance);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+  .rise {
+    animation: rise 900ms var(--ease-entrance) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* WhatsApp wallpaper in the chat's own faint ink. */
+  .wa-wallpaper {
+    background-color: var(--chat-canvas);
+    background-image: radial-gradient(rgb(0 0 0 / 0.045) 1px, transparent 1.2px);
+    background-size: 14px 14px;
+  }
+  [data-theme="dark"] .wa-wallpaper {
+    background-image: radial-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1.2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise {
+      animation: none;
+    }
+    .js .reveal:not(.is-in) {
+      transform: none;
+    }
+  }
+}
