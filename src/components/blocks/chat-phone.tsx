@@ -1,14 +1,16 @@
-import type { Dict } from "@/lib/i18n";
+import { ProductTile } from "@/components/brand/brand";
+
+type Chat = { name: string; status: string; messages: { from: string; text: string; time: string; chips?: string[] }[] };
 
 /** A WhatsApp thread on a phone, drawn entirely from chat and phone tokens. */
-export function ChatPhone({ chat }: { chat: Dict["bizbrain"]["chat"] }) {
+export function ChatPhone({ chat, avatar = "bizbrain" }: { chat: Chat; avatar?: string }) {
   return (
     <div className="relative mx-auto w-full max-w-[22rem]">
       <div aria-hidden="true" className="absolute -inset-8 rounded-[3rem] bg-[radial-gradient(60%_55%_at_50%_45%,var(--spot),transparent_70%)]" />
       <div className="relative rounded-[2.6rem] bg-[linear-gradient(160deg,var(--phone-bezel-from),var(--phone-bezel-to))] p-[0.6rem] shadow-[var(--shadow-float)]">
         <div className="overflow-hidden rounded-[2.1rem] bg-phone-chrome">
           <div className="flex items-center gap-3 border-b border-[var(--phone-hairline)] px-4 pt-6 pb-3">
-            <span className="grid size-9 place-items-center rounded-full bg-[#13161a] text-[0.8125rem] font-semibold text-white">B</span>
+            <ProductTile product={avatar} className="size-9 rounded-full" />
             <div className="min-w-0">
               <p className="truncate text-[0.875rem] font-semibold text-chat-ink">{chat.name}</p>
               <p className="text-[0.75rem] text-chat-meta">{chat.status}</p>

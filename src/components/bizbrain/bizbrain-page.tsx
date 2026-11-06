@@ -1,10 +1,11 @@
 import { Arrow, buttonClass } from "@/components/blocks/buttons";
 import { ClosingBand } from "@/components/blocks/closing";
 import { PageHero } from "@/components/blocks/page-hero";
+import { FaqList } from "@/components/blocks/faq";
 import { Band, Heading, PointGrid } from "@/components/blocks/section";
 import type { Dict } from "@/lib/i18n";
 import { site } from "@/lib/site";
-import { ChatPhone } from "./chat-phone";
+import { ChatPhone } from "@/components/blocks/chat-phone";
 import { BizBrainPricing } from "./pricing";
 
 export function BizBrainPage({ t }: { t: Dict }) {
@@ -45,6 +46,13 @@ export function BizBrainPage({ t }: { t: Dict }) {
       <Band id="pricing" labelledBy="pricing-title">
         <Heading id="pricing-title" eyebrow={b.pricing.eyebrow} title={b.pricing.title} body={b.pricing.body} align="center" />
         <BizBrainPricing p={b.pricing} />
+      </Band>
+
+      <Band tone="tray" labelledBy="faq-title">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+          <Heading id="faq-title" eyebrow={t.common.faq} title={t.common.faqTitle} />
+          <FaqList items={b.faq} />
+        </div>
       </Band>
 
       <ClosingBand tile="bizbrain" title={b.closing.title} body={b.closing.body} actions={actions} note={b.hero.note} />

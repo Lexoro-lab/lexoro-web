@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ProductTile } from "@/components/brand/brand";
 import { Arrow, buttonClass, TextLink, WhatsAppIcon } from "@/components/blocks/buttons";
 import { ClosingBand } from "@/components/blocks/closing";
@@ -53,17 +54,35 @@ export function HomePage({ locale, t }: { locale: Locale; t: Dict }) {
         </div>
       </Band>
 
-      {/* ── Accounting solutions ───────────────────────────────── */}
-      <Band id="accounting" tone="tray" labelledBy="accounting-title">
-        <div className="grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+      {/* ── Solutions ──────────────────────────────────────────── */}
+      <Band id="solutions" tone="tray" labelledBy="solutions-title">
+        <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <div>
-            <Heading id="accounting-title" eyebrow={h.accounting.eyebrow} title={h.accounting.title} body={h.accounting.body} />
-            <a href={whatsappLink(h.accounting.cta)} className={`${buttonClass("brand")} reveal mt-9`}>
-              {h.accounting.cta}
-              <Arrow />
-            </a>
+            <Heading id="solutions-title" eyebrow={h.solutions.eyebrow} title={h.solutions.title} body={h.solutions.body} />
+            <div className="reveal mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link href={localePath(locale, "/solutions")} className={buttonClass("brand")}>
+                {h.solutions.link}
+                <Arrow />
+              </Link>
+              <TextLink href={localePath(locale, "/solutions/tax-filing#enquire")}>{h.solutions.cta}</TextLink>
+            </div>
           </div>
-          <PointGrid items={h.accounting.items} cols={2} numbered />
+          <ol className="border-t border-border-strong">
+            {h.solutions.items.map((item, i) => (
+              <li key={item.href} className="reveal" style={delay(i)}>
+                <Link href={localePath(locale, item.href)} className="group flex gap-5 border-b border-border-strong py-6">
+                  <span className="pt-0.5 font-mono text-[0.8125rem] text-brand-text tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center justify-between gap-4 text-[1.125rem] font-semibold group-hover:text-brand-text">
+                      {item.title}
+                      <Arrow className="shrink-0 text-muted-foreground group-hover:text-brand-text" />
+                    </span>
+                    <span className="mt-1.5 block text-[0.9375rem] leading-relaxed text-muted-foreground">{item.body}</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
       </Band>
 
@@ -78,7 +97,12 @@ export function HomePage({ locale, t }: { locale: Locale; t: Dict }) {
       {/* ── Company ────────────────────────────────────────────── */}
       <Band id="company" tone="tray" labelledBy="company-title">
         <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <Heading id="company-title" eyebrow={h.company.eyebrow} title={h.company.title} body={h.company.body} />
+          <div>
+            <Heading id="company-title" eyebrow={h.company.eyebrow} title={h.company.title} body={h.company.body} />
+            <TextLink href={localePath(locale, "/about")} className="reveal mt-8">
+              {h.company.link}
+            </TextLink>
+          </div>
           <dl className="reveal grid content-start gap-x-10 sm:grid-cols-2">
             {h.company.facts.map((fact) => (
               <div key={fact.label} className="border-t border-border-strong py-5">
@@ -99,10 +123,10 @@ export function HomePage({ locale, t }: { locale: Locale; t: Dict }) {
               <WhatsAppIcon />
               {t.common.whatsapp}
             </a>
-            <a href={`mailto:${site.email}`} className={buttonClass("outline")}>
-              {t.common.email}
+            <Link href={localePath(locale, "/contact")} className={buttonClass("outline")}>
+              {t.common.contact}
               <Arrow />
-            </a>
+            </Link>
           </>
         }
         note={site.email}

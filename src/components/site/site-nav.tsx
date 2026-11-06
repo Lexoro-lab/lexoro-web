@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Logo } from "@/components/brand/brand";
+import { Logo, ProductTile } from "@/components/brand/brand";
 import { Arrow, buttonClass } from "@/components/blocks/buttons";
 import { localePath, type Dict, type Locale } from "@/lib/i18n";
 import { whatsappLink } from "@/lib/site";
@@ -12,8 +12,10 @@ import { cn } from "@/lib/utils";
 /** The same page in the other language (legal pages are English only). */
 function otherLanguage(locale: Locale, pathname: string) {
   if (locale === "ar") return pathname.replace(/^\/ar(?=\/|$)/, "") || "/";
-  return pathname === "/bizbrain" ? "/ar/bizbrain" : "/ar";
+  return ["/privacy", "/terms", "/data-deletion"].includes(pathname) ? "/ar" : `/ar${pathname === "/" ? "" : pathname}`;
 }
+
+const tileFor = (href: string) => (href.endsWith("/fisqel") ? "fisqel" : href.endsWith("/bizbrain") ? "bizbrain" : null);
 
 export function SiteNav({ locale, t }: { locale: Locale; t: Dict }) {
   const pathname = usePathname();
@@ -43,6 +45,8 @@ export function SiteNav({ locale, t }: { locale: Locale; t: Dict }) {
   }, [open]);
 
   const close = () => setOpenOn(null);
+  const bare = locale === "ar" ? pathname.replace(/^\/ar(?=\/|$)/, "") || "/" : pathname;
+  const isActive = (href: string) => bare === href || bare.startsWith(`${href}/`);
 
   return (
     <header
@@ -58,11 +62,45 @@ export function SiteNav({ locale, t }: { locale: Locale; t: Dict }) {
         </Link>
 
         <ul className="ms-4 hidden items-center gap-1 lg:flex">
-          {t.nav.items.map((item) => (
-            <li key={item.href}>
-              <Link href={localePath(locale, item.href)} className="rounded-full px-3 py-2 text-[0.875rem] font-medium text-foreground/75 transition-colors hover:text-foreground">
-                {item.label}
+          {t.nav.groups.map((group) => (
+            <li key={group.href} className="group/menu relative">
+              <Link
+                href={localePath(locale, group.href)}
+                aria-current={isActive(group.href) ? "page" : undefined}
+                className={cn(
+                  "inline-flex items-center gap-1 rounded-full px-3 py-2 text-[0.875rem] font-medium transition-colors",
+                  isActive(group.href) ? "text-foreground" : "text-foreground/75 hover:text-foreground",
+                )}
+              >
+                {group.label}
+                {group.children.length ? (
+                  <svg viewBox="0 0 24 24" className="size-3.5 opacity-60 transition-transform group-hover/menu:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                ) : null}
               </Link>
+              {group.children.length ? (
+                <div className="invisible absolute start-0 top-full pt-2 opacity-0 transition-[opacity,visibility] duration-[var(--duration-fast)] group-focus-within/menu:visible group-focus-within/menu:opacity-100 group-hover/menu:visible group-hover/menu:opacity-100">
+                  <div data-theme={overHero ? "dark" : undefined} className="w-[22rem] rounded-[var(--radius-lg)] border border-border bg-surface p-2 text-foreground shadow-[var(--shadow-lg)]">
+                    {group.children.map((child) => {
+                      const tile = tileFor(child.href);
+                      return (
+                        <Link key={child.href} href={localePath(locale, child.href)} className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 transition-colors hover:bg-foreground/[0.05]">
+                          {tile ? <ProductTile product={tile} className="size-8 rounded-[0.55rem]" /> : <span aria-hidden="true" className="size-[7px] shrink-0 rounded-[2px] bg-dot" />}
+                          <span className="min-w-0">
+                            <span className="block text-[0.875rem] font-semibold">{child.label}</span>
+                            <span className="block text-[0.8125rem] text-muted-foreground">{child.note}</span>
+                          </span>
+                        </Link>
+                      );
+                    })}
+                    <Link href={localePath(locale, group.href)} className="group mt-1 flex items-center justify-between border-t border-border px-3 pt-3 pb-2 text-[0.8125rem] font-semibold text-brand-text">
+                      {t.nav.overview}
+                      <Arrow />
+                    </Link>
+                  </div>
+                </div>
+              ) : null}
             </li>
           ))}
         </ul>
@@ -92,21 +130,31 @@ export function SiteNav({ locale, t }: { locale: Locale; t: Dict }) {
 
       {open ? (
         <div id="mobile-menu" className="h-[calc(100dvh-var(--nav-height))] overflow-y-auto border-t border-border bg-canvas lg:hidden">
-          <ul className="container-page py-4">
-            {t.nav.items.map((item) => (
-              <li key={item.href} className="border-b border-border">
-                <Link href={localePath(locale, item.href)} onClick={close} className="flex items-center justify-between py-4 text-[1.25rem] font-semibold tracking-[-0.02em] rtl:tracking-normal">
-                  {item.label}
+          <div className="container-page py-3">
+            {t.nav.groups.map((group) => (
+              <div key={group.href} className="border-b border-border py-2">
+                <Link href={localePath(locale, group.href)} onClick={close} className="flex items-center justify-between py-2.5 text-[1.25rem] font-semibold tracking-[-0.02em] rtl:tracking-normal">
+                  {group.label}
                   <Arrow className="text-muted-foreground" />
                 </Link>
-              </li>
+                {group.children.length ? (
+                  <ul className="pb-2">
+                    {group.children.map((child) => (
+                      <li key={child.href}>
+                        <Link href={localePath(locale, child.href)} onClick={close} className="flex items-center gap-2.5 py-2 text-[0.9375rem] text-muted-foreground hover:text-foreground">
+                          <span aria-hidden="true" className="size-[6px] rounded-[2px] bg-dot" />
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
             ))}
-            <li className="border-b border-border">
-              <Link href={alternate} onClick={close} className="flex py-4 text-[1rem] font-medium text-muted-foreground">
-                {t.nav.language}
-              </Link>
-            </li>
-          </ul>
+            <Link href={alternate} onClick={close} className="flex py-4 text-[1rem] font-medium text-muted-foreground">
+              {t.nav.language}
+            </Link>
+          </div>
           <div className="container-page pb-8">
             <a href={whatsappLink(t.common.whatsappPrefill)} className={cn(buttonClass("brand", "lg"), "w-full")}>
               {t.common.talk}

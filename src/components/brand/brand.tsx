@@ -39,8 +39,14 @@ export function DotTitle({ text }: { text: string }) {
   );
 }
 
-/** App-icon tiles for the products. Fisqel's is its own: ink and a green square. */
+/** App-icon tiles. Fisqel uses its own app icon; BizBrain and Lexoro are drawn. */
 export function ProductTile({ product, className }: { product: string; className?: string }) {
+  if (product === "fisqel") {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src="/brand/fisqel-icon.png" alt="" aria-hidden="true" width={256} height={256} className={cn("size-11 shrink-0 rounded-[0.8rem]", className)} />
+    );
+  }
   return (
     <span
       aria-hidden="true"
@@ -49,9 +55,7 @@ export function ProductTile({ product, className }: { product: string; className
         className,
       )}
     >
-      {product === "fisqel" ? (
-        <span className="size-[34%] rounded-[3px] bg-[#16c763]" />
-      ) : product === "bizbrain" ? (
+      {product === "bizbrain" ? (
         <svg viewBox="0 0 24 24" className="size-[52%] text-white" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.6L3 21l1.9-5.7A8.4 8.4 0 1 1 21 11.5Z" />
           <path d="m8.5 11.5 2.3 2.3 4.7-4.6" stroke="#4d8dff" />

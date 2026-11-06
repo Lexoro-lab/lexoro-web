@@ -5,9 +5,9 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata({
   title: en.meta.bizbrainTitle,
   description: en.meta.bizbrainDescription,
-  path: "/bizbrain",
+  path: "/products/bizbrain",
   locale: "en",
-  languages: { en: "/bizbrain", ar: "/ar/bizbrain" },
+  languages: { en: "/products/bizbrain", ar: "/ar/products/bizbrain" },
 });
 
 export default function Page() {

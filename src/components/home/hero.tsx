@@ -29,7 +29,7 @@ export function Hero({ locale, t }: { locale: Locale; t: Dict }) {
           <p className="type-lead rise mt-6 max-w-[33rem] text-pretty text-white/60 [--d:160ms]">{h.body}</p>
           <div className="rise [--d:240ms]">
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <a href={localePath(locale, "/#products")} className={buttonClass("brand")}>
+              <a href={localePath(locale, "/products")} className={buttonClass("brand")}>
                 {h.primary}
                 <Arrow />
               </a>

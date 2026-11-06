@@ -37,6 +37,8 @@
   --dot: #004aad;
   --dot-on-brand: #4d8dff;
 
+  --destructive: #b42318;
+
   --whatsapp: #128c4a;
   --whatsapp-hover: #0f7a40;
   --whatsapp-foreground: #ffffff;
@@ -87,6 +89,8 @@
   --brand-line: #1f3f74;
   --dot: #3d82ff;
   --dot-on-brand: #004aad;
+
+  --destructive: #f58b7a;
 
   --whatsapp: #25a55f;
   --whatsapp-hover: #2eb86b;
